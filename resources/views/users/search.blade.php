@@ -6,6 +6,7 @@
     <div class="form-group">
         <textarea name="keyword" username="" cols="30" rows="10" placeholder="ユーザー名"></textarea>
         <!-- 検索ワード -->
+        katori
     </div>
     <input type="image" src="images/post.png" >
 </form>
