@@ -37,13 +37,17 @@ Route::get('post/create' , 'PostsController@create');
 //ログイン中のページ
 Route::get('/top', 'PostsController@index');
 
-Route::get('/profile', 'UsersController@profile');
+Route::get('/profile', 'PostsController@profile');
 
 Route::get('/search', 'UsersController@index');
 Route::get('/search', 'UsersController@search');
 
 Route::get('/add-follow', 'FollowsController@addFollow');
 Route::get('/un-follow', 'FollowsController@unFollow');
+
+Route::get('/followList', 'FollowsController@followList');
+
+Route::get('/followerList' ,'PostsController@followerList');
 
 Route::get('/logout', 'Auth\LoginController@logout');
 

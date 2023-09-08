@@ -41,4 +41,18 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
+    public function followerList()
+    {
+        $posts = DB::table('posts')
+            ->get();
+        return view('follows.followerList');
+    }
+
+    public function profile()
+    {
+        $posts = DB::table('posts')
+            ->get();
+        return view('users.profile');
+    }
+
 }
