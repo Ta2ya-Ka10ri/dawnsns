@@ -3,9 +3,11 @@
 @section('content')
 
 <a>Follow list</a>
-@foreach($follows as $follow)
-    <img src="/images/{{$follow->image}}" alt="">
-    {{$follow->follow_id}}
+@foreach($users as $user)
+    <img src="/images/{{$user->image}}" alt="">
+    {{$user->username}}
+    {{$user->post}}
+    {{$user->follow_id}}
 @endforeach
 
 @endsection
