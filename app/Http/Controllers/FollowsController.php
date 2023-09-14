@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 class FollowsController extends Controller
 {
@@ -14,10 +15,10 @@ class FollowsController extends Controller
         $user = Auth::user();
         $posts = DB::table('posts');
         $follows = DB::table('follows')
-        ->join('posts','users.post_id','=','posts.id')
-        ->join('follows','posts.follow_id','=','follows.id')
+        ->join('users','posts.user_id','=','users.id')
+        ->join('users','follows.follow_id','=','users.id')
         ->where('posts.user_id',Auth::id())
-        ->where('follows.user_id',Auth::id())
+        ->where('follows.follow_id',Auth::id())
         ->select('users.id','posts.post','follows.id','follows.follow_id')
         ->get();
         return view('follows.followList',['user'=>$user,'posts'=>$posts,'follows'=>$follows]);
