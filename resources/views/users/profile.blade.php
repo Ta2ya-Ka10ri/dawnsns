@@ -30,7 +30,7 @@
 {{ Form::text('icon image',null,['class' => 'input']) }}
 <br>
 
-<form action='updateForm'>
+<form action='update'>
 <input type="submit" value="更新">
 </form>
 
