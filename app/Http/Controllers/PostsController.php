@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
-    //
     public function index()
     {
         $user = Auth::user();
@@ -17,7 +16,6 @@ class PostsController extends Controller
         ->where('posts.user_id',Auth::id())
         ->select('users.id','users.image','users.username','posts.post','posts.created_at as created_at')
         ->get();
-        // dd($posts);
         return view('posts.index',['user'=>$user,'posts'=>$posts]);
     }
 
@@ -48,11 +46,27 @@ class PostsController extends Controller
         return view('follows.followerList');
     }
 
+
     public function profile()
     {
-        $posts = DB::table('posts')
-            ->get();
-        return view('users.profile');
+        $users = DB::table('users')
+        ->where('users.id',Auth::id())
+        ->select('users.id','users.username','users.mail','users.password','users.bio','users.image','users.created_at as created_at')
+        ->first();
+        return view('users.profile',['users'=>$users]);
+    }
+
+    public function update(Request $request)
+    {
+        DB::table('users')->insert([
+            'username' => Auth::id(),
+            'mail' => Auth::id(),
+            'password' =>Auth::id(),
+            'bio' => $newPost,
+            'image' =>$newPost,
+            'created_at' => now()
+            ]);
+            return redirect('/top');
     }
 
 }

@@ -5,23 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Schema;
 
 class FollowsController extends Controller
 {
-
     public function followList()
     {
         $user = Auth::user();
-        $posts = DB::table('posts');
-        $follows = DB::table('follows')
-        ->join('users','posts.user_id','=','users.id')
-        ->join('users','follows.follow_id','=','users.id')
-        ->where('posts.user_id',Auth::id())
-        ->where('follows.follow_id',Auth::id())
-        ->select('users.id','posts.post','follows.id','follows.follow_id')
+        $others = DB::table('users')
+        ->join('follows','follows.follow_id','=','users.id')
+        ->where('follows.follower_id',Auth::id())
+        ->select('users.image')
         ->get();
-        return view('follows.followList',['user'=>$user,'posts'=>$posts,'follows'=>$follows]);
+        // dd($others);
+        $posts = DB::table('posts')
+        ->join('users','posts.user_id','=','users.id')
+        ->join('follows','follows.follow_id','=','users.id')
+        ->where('follows.follower_id',Auth::id())
+        ->select('users.id','users.username','users.image','posts.post','posts.created_at','posts.user_id','follows.id','follows.follow_id')
+        ->get();
+        return view('follows.followList',['user'=>$user,'posts'=>$posts,'others'=>$others]);
     }
 
     public function addFollow(Request $request)

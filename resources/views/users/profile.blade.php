@@ -4,27 +4,35 @@
 
 {!! Form::open() !!}
 
+<img src="images/dawn.png">
+
 {{ Form::label('UserName') }}
-{{ Form::text('username',null,['class' => 'input']) }}
+<input class="form-control" id="Auth::user()" placeholder={{Auth::user()->username}} name="Auth::user()" type="text">
+<br>
 
 {{ Form::label('MailAdress') }}
-{{ Form::text('mail',null,['class' => 'input']) }}
+<input class="form-control" id="Auth::user()" placeholder={{Auth::user()->mail}} name="Auth::user()" type="text">
+<br>
 
 {{ Form::label('Password') }}
-{{ Form::text('password',null,['class' => 'input']) }}
+<input type="password" id="password" placeholder=●●●●●●● name="password" type="text">
+<br>
 
 {{ Form::label('new Password') }}
 {{ Form::text('password-confirm',null,['class' => 'input']) }}
+<br>
 
 {{ Form::label('Bio') }}
 {{ Form::text('bio',null,['class' => 'input']) }}
+<br>
 
 {{ Form::label('Icon Image') }}
 {{ Form::text('icon image',null,['class' => 'input']) }}
-
 <br>
 
-{{ Form::submit('更新') }}
+<form action='updateForm'>
+<input type="submit" value="更新">
+</form>
 
 {!! Form::close() !!}
 

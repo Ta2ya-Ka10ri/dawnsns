@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="clear">
-<p>○○さん
+<p>{{Auth::user()->username}}さん
 </p>
 <p>ようこそ！DAWNSNSへ！</p>
 <p>ユーザー登録が完了しました。</p>

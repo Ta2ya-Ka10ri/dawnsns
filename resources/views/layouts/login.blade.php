@@ -26,7 +26,7 @@
             <div id="">
                 <div id="">
                     <p>
-                    さん
+                    {{Auth::user()->username}}さん
                     <img src="images/dawn.png">
                 </p>
                 <div>
@@ -45,7 +45,7 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>さんの</p>
+                <p>{{Auth::user()->username}}さんの</p>
                 <div>
                 <p>フォロー数</p>
                 <p>〇〇名</p>
