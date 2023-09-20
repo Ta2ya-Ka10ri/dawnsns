@@ -58,6 +58,7 @@ class PostsController extends Controller
 
     public function update(Request $request)
     {
+        $newPost=$request->newPost;
         DB::table('users')->insert([
             'username' => Auth::id(),
             'mail' => Auth::id(),

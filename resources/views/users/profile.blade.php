@@ -10,7 +10,7 @@
 <input class="form-control" id="Auth::user()" placeholder={{Auth::user()->username}} name="Auth::user()" type="text">
 <br>
 
-{{ Form::label('MailAdress') }}
+{{ Form::label('MailAddress') }}
 <input class="form-control" id="Auth::user()" placeholder={{Auth::user()->mail}} name="Auth::user()" type="text">
 <br>
 
