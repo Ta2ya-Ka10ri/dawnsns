@@ -56,18 +56,4 @@ class PostsController extends Controller
         return view('users.profile',['users'=>$users]);
     }
 
-    public function update(Request $request)
-    {
-        $newPost=$request->newPost;
-        DB::table('users')->insert([
-            'username' => Auth::id(),
-            'mail' => Auth::id(),
-            'password' =>Auth::id(),
-            'bio' => $newPost,
-            'image' =>$newPost,
-            'created_at' => now()
-            ]);
-            return redirect('/top');
-    }
-
 }
