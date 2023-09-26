@@ -57,4 +57,4 @@ Route::get('/post/{id}/delete', 'PostsController@delete');
 
 Route::get('/result', 'UsersController@result');
 
-Route::get('user/{id}/update', 'UsersController@update');
+Route::post('/profile', 'UsersController@update');

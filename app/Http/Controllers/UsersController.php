@@ -38,6 +38,7 @@ class UsersController extends Controller
             'image' =>$newPost,
             'created_at' => now()
             ]);
+            dd('hello');
             return redirect('/top');
     }
 
