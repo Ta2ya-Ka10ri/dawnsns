@@ -47,6 +47,8 @@ Route::get('/un-follow', 'FollowsController@unFollow');
 
 Route::get('/followList', 'FollowsController@followList');
 
+Route::get('followerList', 'PostsController@followerList');
+
 Route::get('/followerList' ,'PostsController@followerList');
 
 Route::get('/logout', 'Auth\LoginController@logout');

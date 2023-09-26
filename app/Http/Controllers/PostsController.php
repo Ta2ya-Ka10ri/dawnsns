@@ -39,14 +39,6 @@ class PostsController extends Controller
         return redirect('/top');
     }
 
-    public function followerList()
-    {
-        $posts = DB::table('posts')
-            ->get();
-        return view('follows.followerList');
-    }
-
-
     public function profile()
     {
         $users = DB::table('users')
@@ -54,6 +46,24 @@ class PostsController extends Controller
         ->select('users.id','users.username','users.mail','users.password','users.bio','users.image','users.created_at as created_at')
         ->first();
         return view('users.profile',['users'=>$users]);
+    }
+
+    public function followerList()
+    {
+        $user = Auth::user();
+        $others = DB::table('users')
+        ->join('follows','follows.follower_id','=','users.id')
+        ->where('follows.follow_id',Auth::id())
+        ->select('users.image')
+        ->get();
+        // dd($others);
+        $posts = DB::table('posts')
+        ->join('users','posts.user_id','=','users.id')
+        ->join('follows','follows.follower_id','=','users.id')
+        ->where('follows.follow_id',Auth::id())
+        ->select('users.id','users.username','users.image','posts.post','posts.created_at','posts.user_id','follows.id','follows.follower_id')
+        ->get();
+        return view('follows.followerList',['user'=>$user,'posts'=>$posts,'others'=>$others]);
     }
 
 }
