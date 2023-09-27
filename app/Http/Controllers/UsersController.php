@@ -29,16 +29,14 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
-        $newPost=$request->newPost;
-        DB::table('users')->insert([
-            'username' => Auth::id(),
-            'mail' => Auth::id(),
-            'password' =>Auth::id(),
-            'bio' => $newPost,
-            'image' =>$newPost,
-            'created_at' => now()
-            ]);
-            dd('hello');
+        $id = $request->input('id');
+        $up_user = $request->input('upUser');
+        DB::table('users')
+            ->where('id', $id)
+            ->update(
+                ['user' => $up_user]
+            );
+            dd($up_user);
             return redirect('/top');
     }
 

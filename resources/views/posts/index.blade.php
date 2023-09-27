@@ -16,9 +16,11 @@
     {{$post->username}}
     {{$post->post}}
     {{$post->created_at}}
-    <a class="btn btn-primary" href="/post/{{ $post->id }}/update-form">
-    <input type="image" src="images/edit.png" >
-    </a>
+    {!! Form::open(['url' => '/post/update']) !!}
+            {!! Form::hidden('id', $post->id) !!}
+            {!! Form::input('text', 'upPost', $post->post, ['required', 'class' => 'form-control']) !!}
+        <button type="submit" class="btn btn-primary pull-right">更新</button>
+        {!! Form::close() !!}
     <a class="btn btn-danger" href="/post/{{ $post->id }}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">
     <input type="image" src="images/trash_h.png" >
 </a>

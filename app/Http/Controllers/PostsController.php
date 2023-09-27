@@ -14,7 +14,7 @@ class PostsController extends Controller
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
         ->where('posts.user_id',Auth::id())
-        ->select('users.id','users.image','users.username','posts.post','posts.created_at as created_at')
+        ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at')
         ->get();
         return view('posts.index',['user'=>$user,'posts'=>$posts]);
     }
@@ -27,6 +27,24 @@ class PostsController extends Controller
             'post' => $newPost,
             'created_at' => now()
         ]);
+
+        $post = $request->input('newPost');
+        DB::table('posts')->insert([
+            'post' => $post
+        ]);
+
+        return redirect('/top');
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->input('id');
+        $up_post = $request->input('upPost');
+        DB::table('posts')
+            ->where('id', $id)
+            ->update(
+                ['post' => $up_post]
+            );
 
         return redirect('/top');
     }
@@ -56,7 +74,6 @@ class PostsController extends Controller
         ->where('follows.follow_id',Auth::id())
         ->select('users.image')
         ->get();
-        // dd($others);
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
         ->join('follows','follows.follower_id','=','users.id')

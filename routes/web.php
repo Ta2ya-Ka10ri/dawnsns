@@ -30,7 +30,6 @@ Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/added', 'Auth\RegisterController@added');
-Route::post('/added', 'Auth\RegisterController@added')->name('username');
 
 Route::get('post/create' , 'PostsController@create');
 
@@ -39,15 +38,12 @@ Route::get('/top', 'PostsController@index');
 
 Route::get('/profile', 'PostsController@profile');
 
-Route::get('/search', 'UsersController@index');
 Route::get('/search', 'UsersController@search');
 
 Route::get('/add-follow', 'FollowsController@addFollow');
 Route::get('/un-follow', 'FollowsController@unFollow');
 
 Route::get('/followList', 'FollowsController@followList');
-
-Route::get('followerList', 'PostsController@followerList');
 
 Route::get('/followerList' ,'PostsController@followerList');
 
@@ -59,4 +55,6 @@ Route::get('/post/{id}/delete', 'PostsController@delete');
 
 Route::get('/result', 'UsersController@result');
 
-Route::post('/profile', 'UsersController@update');
+Route::post('post/update', 'PostsController@update');
+
+Route::post('user/update', 'UsersController@update');

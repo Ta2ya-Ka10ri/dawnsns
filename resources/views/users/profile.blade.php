@@ -2,12 +2,14 @@
 
 @section('content')
 
-{!! Form::open() !!}
-
-<img src="images/dawn.png">
+<img src="/images/{{$user->image}}" alt="">
 
 {{ Form::label('UserName') }}
-<input class="form-control" id="Auth::user()" placeholder={{Auth::user()->username}} name="Auth::user()" type="text">
+<input class="form-control" id="Auth::user()" placeholder={{Auth::user()->username}} {!! Form::open(['url' => '/user/update']) !!}
+        {!! Form::hidden('id', $user->id) !!}
+        {!! Form::input('text', 'upPost', $user->user, ['required', 'class' => 'form-control']) !!}>
+{!! Form::close() !!}
+
 <br>
 
 {{ Form::label('MailAddress') }}
@@ -30,10 +32,8 @@
 {{ Form::text('icon image',null,['class' => 'input']) }}
 <br>
 
-<form action='update'>
-<input type="submit" value="更新">
-</form>
+<button type="submit" class="btn btn-primary pull-right">更新</button>
 
-{!! Form::close() !!}
+
 
 @endsection
