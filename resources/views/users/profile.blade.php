@@ -8,7 +8,7 @@
 <input class="form-control" id="Auth::user()" placeholder={{Auth::user()->username}} {!! Form::open(['url' => '/user/update']) !!}
         {!! Form::hidden('id', $user->id) !!}
         {!! Form::input('text', 'upPost', $user->user, ['required', 'class' => 'form-control']) !!}>
-{!! Form::close() !!}
+        {!! Form::close() !!}
 
 <br>
 

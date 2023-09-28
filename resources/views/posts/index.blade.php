@@ -20,7 +20,7 @@
             {!! Form::hidden('id', $post->id) !!}
             {!! Form::input('text', 'upPost', $post->post, ['required', 'class' => 'form-control']) !!}
         <button type="submit" class="btn btn-primary pull-right">更新</button>
-        {!! Form::close() !!}
+    {!! Form::close() !!}
     <a class="btn btn-danger" href="/post/{{ $post->id }}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">
     <input type="image" src="images/trash_h.png" >
 </a>

@@ -35,7 +35,8 @@ class UsersController extends Controller
             ->where('id', $id)
             ->update(
                 ['user' => $up_user]
-            );
+            )
+            ->first();
             return redirect('/top');
     }
 

@@ -28,11 +28,6 @@ class PostsController extends Controller
             'created_at' => now()
         ]);
 
-        $post = $request->input('newPost');
-        DB::table('posts')->insert([
-            'post' => $post
-        ]);
-
         return redirect('/top');
     }
 
