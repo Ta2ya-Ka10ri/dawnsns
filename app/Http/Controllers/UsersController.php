@@ -36,7 +36,6 @@ class UsersController extends Controller
             ->update(
                 ['user' => $up_user]
             );
-            dd($up_user);
             return redirect('/top');
     }
 
