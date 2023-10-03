@@ -5,13 +5,13 @@
 <a>Follow list</a>
 
 @foreach($others as $other)
-    <img src="/images/{{$other->image}}" alt="">
+    <a href="/profile/$other->image"><img src="/images/{{$other->image}}" alt=""></a>
 <float:left>
 @endforeach
 <br>
 
 @foreach($posts as $post)
-    <img src="/images/{{$post->image}}" alt="">
+<a href="/profile"><img src="/images/{{$post->image}}" alt=""></a>
     {{$post->username}}
     {{$post->post}}
     {{$post->created_at}}

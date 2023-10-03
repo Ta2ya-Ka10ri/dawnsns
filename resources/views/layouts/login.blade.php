@@ -23,12 +23,14 @@
     <header>
         <div id = "head">
         <h1><a><img src="images/main_logo.png"></a></h1>
+
             <div id="">
                 <div id="">
                     <p>
                     {{Auth::user()->username}}さん
                     <img src="images/dawn.png">
                 </p>
+                </div>
                 <div>
                 <ul>
                     <li><a href="/top">ホーム</a></li>

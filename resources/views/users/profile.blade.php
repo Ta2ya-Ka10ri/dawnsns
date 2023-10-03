@@ -2,14 +2,12 @@
 
 @section('content')
 
-<img src="/images/{{$user->image}}" alt="">
+{!! Form::open() !!}
+
+<img src="images/dawn.png">
 
 {{ Form::label('UserName') }}
-<input class="form-control" id="Auth::user()" placeholder={{Auth::user()->username}} {!! Form::open(['url' => '/user/update']) !!}
-        {!! Form::hidden('id', $user->id) !!}
-        {!! Form::input('text', 'upPost', $user->user, ['required', 'class' => 'form-control']) !!}>
-        {!! Form::close() !!}
-
+<input class="form-control" id="Auth::user()" placeholder={{Auth::user()->username}} name="Auth::user()" type="text">
 <br>
 
 {{ Form::label('MailAddress') }}
@@ -25,15 +23,21 @@
 <br>
 
 {{ Form::label('Bio') }}
-{{ Form::text('bio',null,['class' => 'input']) }}
+<textarea name="main" cols="40" rows="10"></textarea>
 <br>
 
-{{ Form::label('Icon Image') }}
-{{ Form::text('icon image',null,['class' => 'input']) }}
+<form action="/newpostsend" method="post" enctype="multipart/form-data">
+    <p>&nbsp;</p>
+
+    <p>&nbsp;</p>
+    <p>画像をアップロード</p>
+    <input type="file" name="post_img">
+
+</form>
 <br>
 
 <button type="submit" class="btn btn-primary pull-right">更新</button>
 
-
+{!! Form::close() !!}
 
 @endsection
