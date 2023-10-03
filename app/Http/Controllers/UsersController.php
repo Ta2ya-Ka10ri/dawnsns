@@ -12,8 +12,11 @@ class UsersController extends Controller
     {
         $users = DB::table('users')
         ->get();
-        // dd($users);
-        return view('users.search',['users'=>$users]);
+        $follows = DB::table('follows')
+        ->where('follower_id',Auth::id())
+        ->pluck('follow_id');
+        // dd($follows);
+        return view('users.search',['users'=>$users,'follows'=>$follows]);
     }
 
     public function result(Request $request)
@@ -29,31 +32,38 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
-        $id = $request->input('id');
+        $id = Auth::id();
         $up_user = $request->input('upUser');
+        // dd($up_user);
         DB::table('users')
             ->where('id', $id)
             ->update(
-                ['user' => $up_user]
-            )
-            ->first();
-            return redirect('/top');
-    }
+                ['username'=> $up_user]
+            );
+        $up_mail = $request->input('upMail');
+        // dd($up_mail);
+        DB::table('users')
+        ->where('id', $id)
+        ->update(
+            ['mail'=> $up_mail]
+        );
 
-    public function savenew(Request $request){
+        $newBio=$request->input('newBio');
+        // dd($newBio);
+        DB::table('users')
+        ->where('id', $id)
+        ->update(
+            ['bio'=> $newBio]
+        );
 
-        $user = new Form;
-        $user->title = $request->title;
-        $user->main = $request->main;
-        $user->save();
-
-if($request->user_img){
-
-    if($request->user_img->extension() == 'gif' || $request->user_img->extension() == 'jpeg' || $request->user_img->extension() == 'jpg' || $request->user_img->extension() == 'png'){
-    $request->file('user_img')->storeAs('public/user_img', $user->id.'.'.$request->user_img->extension());
-    }
-}
-            return redirect('/top');
+        $newImage=$request->input('newImage');
+        dd($newImage);
+        DB::table('users')
+        ->where('id', $id)
+        ->update(
+            ['image'=> $newImage]
+        );
+            return redirect('/profile');
     }
 
 }

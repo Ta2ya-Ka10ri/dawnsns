@@ -2,20 +2,20 @@
 
 @section('content')
 
-{!! Form::open() !!}
-
+<form action="user/update" method="post" enctype="multipart/form-data">
+{{ csrf_field() }}
 <img src="images/dawn.png">
 
 {{ Form::label('UserName') }}
-<input class="form-control" id="Auth::user()" placeholder={{Auth::user()->username}} name="Auth::user()" type="text">
+<input class="form-control" id="Auth::user()" value="{{Auth::user()->username}}" name="upUser" type="text">
 <br>
 
 {{ Form::label('MailAddress') }}
-<input class="form-control" id="Auth::user()" placeholder={{Auth::user()->mail}} name="Auth::user()" type="text">
+<input class="form-control" id="Auth::user()" value="{{Auth::user()->mail}}" name="upMail" type="text">
 <br>
 
 {{ Form::label('Password') }}
-<input type="password" id="password" placeholder=●●●●●●● name="password" type="text">
+<input type="password" id="password" value=●●●●●●● name="password" type="text">
 <br>
 
 {{ Form::label('new Password') }}
@@ -23,21 +23,12 @@
 <br>
 
 {{ Form::label('Bio') }}
-<textarea name="main" cols="40" rows="10"></textarea>
+<input class="form-control" id="Auth::user()" value="{{Auth::user()->bio}}" name="newBio" type="text" cols="40" rows="10">
 <br>
-
-<form action="/newpostsend" method="post" enctype="multipart/form-data">
-    <p>&nbsp;</p>
-
-    <p>&nbsp;</p>
-    <p>画像をアップロード</p>
-    <input type="file" name="post_img">
-
-</form>
+{{ Form::label('Icon Image') }}
+<input type="file" id="Auth::user()" name="post_img">
 <br>
 
 <button type="submit" class="btn btn-primary pull-right">更新</button>
-
-{!! Form::close() !!}
 
 @endsection

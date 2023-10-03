@@ -13,14 +13,17 @@
 @foreach($users as $user)
     <img src="/images/{{$user->image}}" alt="">
     {{$user->username}}
-    <form action='/add-follow'>
-        <input name="id" value="{{$user->id}}" type="hidden">
-        <input type="submit" value="フォローする">
-    </form>
+    @if($follows->contains($user->id))
     <form action='/un-follow'>
         <input name="id" value="{{$user->id}}" type="hidden">
         <input type="submit" value="フォローを外す">
     </form>
+    @else
+    <form action='/add-follow'>
+        <input name="id" value="{{$user->id}}" type="hidden">
+        <input type="submit" value="フォローする">
+    </form>
+    @endif
     <br>
 @endforeach
 
