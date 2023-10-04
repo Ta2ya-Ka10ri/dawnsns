@@ -23,7 +23,7 @@
 <br>
 
 {{ Form::label('Bio') }}
-<input class="form-control" id="Auth::user()" value="{{Auth::user()->bio}}" name="newBio" type="text" cols="40" rows="10">
+<input class="form-control" id="Auth::user()" value="{{Auth::user()->bio}}" name="newBio" type="text" style="width:200px;height:100px;">
 <br>
 {{ Form::label('Icon Image') }}
 <input type="file" id="Auth::user()" name="post_img">

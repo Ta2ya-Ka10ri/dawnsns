@@ -5,7 +5,9 @@
 <a>Follower list</a>
 
 @foreach($others as $other)
+<a href="/profile">
     <img src="/images/{{$other->image}}" alt="">
+</a>
 <float:left>
 @endforeach
 <br>

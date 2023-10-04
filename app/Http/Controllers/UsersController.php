@@ -56,8 +56,8 @@ class UsersController extends Controller
             ['bio'=> $newBio]
         );
 
-        $newImage=$request->input('newImage');
-        dd($newImage);
+        $newImage=$request->file('【newImage】');
+        // dd($newImage);
         DB::table('users')
         ->where('id', $id)
         ->update(
