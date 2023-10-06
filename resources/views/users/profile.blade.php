@@ -26,7 +26,7 @@
 <input class="form-control" id="Auth::user()" value="{{Auth::user()->bio}}" name="newBio" type="text" style="width:200px;height:100px;">
 <br>
 {{ Form::label('Icon Image') }}
-<input type="file" id="Auth::user()" name="post_img">
+<input type="file" id="Auth::user()" name="newImage">
 <br>
 
 <button type="submit" class="btn btn-primary pull-right">更新</button>
