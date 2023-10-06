@@ -13,7 +13,9 @@
 <br>
 
 @foreach($posts as $post)
+<a href="/profile">
     <img src="/images/{{$post->image}}" alt="">
+</a>
     {{$post->username}}
     {{$post->post}}
     {{$post->created_at}}
