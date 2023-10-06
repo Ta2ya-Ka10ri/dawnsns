@@ -4,11 +4,12 @@
 
 <form action="result">
     <div class="form-group">
-        <textarea name="keyword" username="" cols="30" rows="10" placeholder="ユーザー名"></textarea>
-<p>検索ワード</p>
+        <textarea name="keyword" username="" placeholder="ユーザー名"></textarea>
     </div>
     <input type="image" src="images/post.png" >
 </form>
+
+<p>検索ワード:</p>
 
 @foreach($users as $user)
     <img src="/images/{{$user->image}}" alt="">

@@ -22,7 +22,7 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a><img src="images/main_logo.png"></a></h1>
+        <h1><a href="/top"><img src="images/main_logo.png"></a></h1>
 
             <div id="">
                 <div id="">
@@ -32,11 +32,12 @@
                 </p>
                 </div>
                 <div>
-                <ul>
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
-                </ul>
+                <details>
+                    <summary></summary>
+                    <p><a href="/top">ホーム</a></p>
+                    <p><a href="/profile">プロフィール</a></p>
+                    <p><a href="/logout">ログアウト</a></p>
+                </details>
             </div>
         </div>
 
@@ -52,14 +53,14 @@
                 <p>フォロー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="/followList">フォローリスト</a></p>
+               <button onclick="location.href='/followList'">フォローリスト</button>
                 <div>
                 <p>フォロワー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="/followerList">フォロワーリスト</a></p>
+                <button onclick="location.href='/followerList'">フォロワーリスト</button>
             </div>
-            <p class="btn"><a href="/search">ユーザー検索</a></p>
+                <button onclick="location.href='/search'">ユーザー検索</button>
         </div>
     </div>
     <footer>

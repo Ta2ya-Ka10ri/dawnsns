@@ -27,8 +27,19 @@ class UsersController extends Controller
         ->where('username', 'like', '%' . $keyword . '%')
         ->get();
         // dd($users);
-        return view('users.search',['users'=>$users]);
+        $follows = DB::table('follows')
+        ->where('follower_id',Auth::id())
+        ->pluck('follow_id');
+        return view('users.search',['users'=>$users,'follows'=>$follows]);
     }
+
+    public function getIndex(Request $request)
+    {
+        //キーワード受け取り
+            $keyword = $request->input('keyword');
+
+            return view('users.search')->with('keyword',$keyword);
+        }
 
     public function update(Request $request)
     {
