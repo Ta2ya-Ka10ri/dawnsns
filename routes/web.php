@@ -58,3 +58,5 @@ Route::get('/result', 'UsersController@result');
 Route::post('post/update', 'PostsController@update');
 
 Route::post('user/update', 'UsersController@update');
+
+Route::get('/friend profile','UsersController@profile');
