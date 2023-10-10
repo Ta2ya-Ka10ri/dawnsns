@@ -5,7 +5,7 @@
 <a>Follow list</a>
 
 @foreach($others as $other)
-<a href="/friend profile">
+<a href="/follow profile">
     <img src="/images/{{$other->image}}" alt="">
 </a>
 <float:left>
@@ -13,7 +13,7 @@
 <br>
 
 @foreach($posts as $post)
-<a href="/profile">
+<a href="/follow profile">
     <img src="/images/{{$post->image}}" alt="">
 </a>
     {{$post->username}}

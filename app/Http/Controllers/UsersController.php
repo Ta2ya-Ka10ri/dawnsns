@@ -84,39 +84,26 @@ class UsersController extends Controller
         ->select('users.id','users.username','users.mail','users.password','users.bio','users.image','users.created_at as created_at')
         ->first();
 
-        return view('users.friend profile',['users'=>$users]);
-    }
-
-    public function followerList()
-    {
         $user = Auth::user();
         $others = DB::table('users')
-        ->join('follows','follows.follower_id','=','users.id')
-        ->where('follows.follow_id',Auth::id())
+        ->join('follows','follows.follow_id','=','users.id')
+        ->where('follows.follower_id',Auth::id())
         ->select('users.image')
+        ->first();
+
+        return view('users.follow profile',
+        ['users'=>$users,'others'=>$others]);
+    }
+
+    public function index()
+    {
+        $user = Auth::user();
+        $posts = DB::table('posts')
+        ->join('users','posts.user_id','=','users.id')
+        ->where('posts.user_id',Auth::id())
+        ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at')
         ->get();
-
-        return view('users.follow profile',['user'=>$user,'others'=>$others]);
-    }
-
-    public function addFollow(Request $request)
-    {
-        $newPost = $request->id;
-        DB::table('follows')->insert([
-            'follow_id' => $newPost,
-            'follower_id' => Auth::id()
-        ]);
-        return view('users.friend profile');
-    }
-
-    public function unFollow(Request $request)
-    {
-        $id = $request->id;
-        $follows = DB::table('follows')
-            ->where('follow_id', $id)
-            ->where('follower_id', Auth::id())
-            ->delete();
-            return view('users.friend profile');
+        return view('users.follow profile',['user'=>$user,'posts'=>$posts]);
     }
 
 }
