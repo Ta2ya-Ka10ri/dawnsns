@@ -59,4 +59,4 @@ Route::post('post/update', 'PostsController@update');
 
 Route::post('user/update', 'UsersController@update');
 
-Route::get('/friend profile','UsersController@profile');
+Route::get('/follow profile','UsersController@profile');

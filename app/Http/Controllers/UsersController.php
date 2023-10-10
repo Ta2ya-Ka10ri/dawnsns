@@ -84,14 +84,19 @@ class UsersController extends Controller
         ->select('users.id','users.username','users.mail','users.password','users.bio','users.image','users.created_at as created_at')
         ->first();
 
-        $posts = DB::table('posts')
-        ->join('users','posts.user_id','=','users.id')
+        return view('users.friend profile',['users'=>$users]);
+    }
+
+    public function followerList()
+    {
+        $user = Auth::user();
+        $others = DB::table('users')
         ->join('follows','follows.follower_id','=','users.id')
         ->where('follows.follow_id',Auth::id())
-        ->select('users.id','users.username','users.image','posts.post','posts.created_at','posts.user_id','follows.id','follows.follower_id')
+        ->select('users.image')
         ->get();
 
-        return view('users.friend profile',['users'=>$users,'posts'=>$posts]);
+        return view('users.follow profile',['user'=>$user,'others'=>$others]);
     }
 
     public function addFollow(Request $request)
