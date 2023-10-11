@@ -91,19 +91,35 @@ class UsersController extends Controller
         ->select('users.image')
         ->first();
 
-        return view('users.follow profile',
-        ['users'=>$users,'others'=>$others]);
-    }
-
-    public function index()
-    {
         $user = Auth::user();
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
         ->where('posts.user_id',Auth::id())
         ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at')
         ->get();
-        return view('users.follow profile',['user'=>$user,'posts'=>$posts]);
+
+        return view('users.followProfile',
+        ['users'=>$users,'others'=>$others,'posts'=>$posts,'follows'=>$follows]);
+    }
+
+    public function addFollow(Request $request)
+    {
+        $newPost = $request->id;
+        DB::table('follows')->insert([
+            'follow_id' => $newPost,
+            'follower_id' => Auth::id()
+        ]);
+        return redirect('/search');
+    }
+
+    public function unFollow(Request $request)
+    {
+        $id = $request->id;
+        $follows = DB::table('follows')
+            ->where('follow_id', $id)
+            ->where('follower_id', Auth::id())
+            ->delete();
+        return redirect('/search');
     }
 
 }
