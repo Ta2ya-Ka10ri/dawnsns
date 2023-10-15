@@ -8,8 +8,9 @@
     </div>
     <input type="image" src="images/post.png" >
 </form>
-
-<p>検索ワード:</p>
+@if($keyword!=null)
+<p>検索ワード:{{$keyword}}</p>
+@endif
 
 @foreach($users as $user)
     <img src="/images/{{$user->image}}" alt="">

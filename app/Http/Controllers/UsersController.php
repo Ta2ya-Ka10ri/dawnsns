@@ -15,8 +15,9 @@ class UsersController extends Controller
         $follows = DB::table('follows')
         ->where('follower_id',Auth::id())
         ->pluck('follow_id');
-        // dd($follows);
-        return view('users.search',['users'=>$users,'follows'=>$follows]);
+        $keyword = null;
+        // dd($keyword);
+        return view('users.search',['users'=>$users,'follows'=>$follows,'keyword'=>$keyword]);
     }
 
     public function result(Request $request)
@@ -30,16 +31,8 @@ class UsersController extends Controller
         $follows = DB::table('follows')
         ->where('follower_id',Auth::id())
         ->pluck('follow_id');
-        return view('users.search',['users'=>$users,'follows'=>$follows]);
+        return view('users.search',['users'=>$users,'follows'=>$follows,'keyword'=>$keyword]);
     }
-
-    public function getIndex(Request $request)
-    {
-        //キーワード受け取り
-            $keyword = $request->input('keyword');
-
-            return view('users.search')->with('keyword',$keyword);
-        }
 
     public function update(Request $request)
     {
@@ -80,23 +73,27 @@ class UsersController extends Controller
     public function profile()
     {
         $users = DB::table('users')
-        ->where('users.id',Auth::id())
+        ->where('users.id',Auth::user())
         ->select('users.id','users.username','users.mail','users.password','users.bio','users.image','users.created_at as created_at')
         ->first();
 
         $user = Auth::user();
         $others = DB::table('users')
         ->join('follows','follows.follow_id','=','users.id')
-        ->where('follows.follower_id',Auth::id())
+        ->where('follows.follower_id',Auth::user())
         ->select('users.image')
         ->first();
 
         $user = Auth::user();
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
-        ->where('posts.user_id',Auth::id())
+        ->where('posts.user_id',Auth::user())
         ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at')
         ->get();
+
+        $follows = DB::table('follows')
+        ->where('follower_id',Auth::user())
+        ->pluck('follow_id');
 
         return view('users.followProfile',
         ['users'=>$users,'others'=>$others,'posts'=>$posts,'follows'=>$follows]);
@@ -109,7 +106,7 @@ class UsersController extends Controller
             'follow_id' => $newPost,
             'follower_id' => Auth::id()
         ]);
-        return redirect('/search');
+        return redirect('/follow-profile');
     }
 
     public function unFollow(Request $request)
@@ -119,7 +116,7 @@ class UsersController extends Controller
             ->where('follow_id', $id)
             ->where('follower_id', Auth::id())
             ->delete();
-        return redirect('/search');
+        return redirect('/follow-profile');
     }
 
 }

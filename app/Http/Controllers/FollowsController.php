@@ -11,6 +11,10 @@ class FollowsController extends Controller
     public function followList()
     {
         $user = Auth::user();
+        $follow_count = DB::table('follows')
+        ->where('follower_id',Auth::id())
+        ->count();
+        // dd($follow_count);
         $others = DB::table('users')
         ->join('follows','follows.follow_id','=','users.id')
         ->where('follows.follower_id',Auth::id())
@@ -23,7 +27,7 @@ class FollowsController extends Controller
         ->where('follows.follower_id',Auth::id())
         ->select('users.id','users.username','users.image','posts.post','posts.created_at','posts.user_id','follows.id','follows.follow_id')
         ->get();
-        return view('follows.followList',['user'=>$user,'posts'=>$posts,'others'=>$others]);
+        return view('follows.followList',['user'=>$user,'posts'=>$posts,'others'=>$others,'follow_count'=>$follow_count]);
     }
 
     public function addFollow(Request $request)

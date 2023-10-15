@@ -64,6 +64,10 @@ class PostsController extends Controller
     public function followerList()
     {
         $user = Auth::user();
+        $follower_count = DB::table('follows')
+        ->where('follow_id',Auth::id())
+        ->count();
+        // dd($follower_count);
         $others = DB::table('users')
         ->join('follows','follows.follower_id','=','users.id')
         ->where('follows.follow_id',Auth::id())
@@ -75,7 +79,7 @@ class PostsController extends Controller
         ->where('follows.follow_id',Auth::id())
         ->select('users.id','users.username','users.image','posts.post','posts.created_at','posts.user_id','follows.id','follows.follower_id')
         ->get();
-        return view('follows.followerList',['user'=>$user,'posts'=>$posts,'others'=>$others]);
+        return view('follows.followerList',['user'=>$user,'posts'=>$posts,'others'=>$others,'follower_count'=>$follower_count]);
     }
 
 }
