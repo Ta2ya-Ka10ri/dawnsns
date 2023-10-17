@@ -73,26 +73,26 @@ class UsersController extends Controller
     public function profile()
     {
         $users = DB::table('users')
-        ->where('users.id',Auth::user())
+        ->where('users.id',Auth::id())
         ->select('users.id','users.username','users.mail','users.password','users.bio','users.image','users.created_at as created_at')
         ->first();
 
         $user = Auth::user();
         $others = DB::table('users')
         ->join('follows','follows.follow_id','=','users.id')
-        ->where('follows.follower_id',Auth::user())
+        ->where('follows.follower_id',Auth::id())
         ->select('users.image')
         ->first();
 
         $user = Auth::user();
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
-        ->where('posts.user_id',Auth::user())
+        ->where('posts.user_id',Auth::id())
         ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at')
         ->get();
 
         $follows = DB::table('follows')
-        ->where('follower_id',Auth::user())
+        ->where('follower_id',Auth::id())
         ->pluck('follow_id');
 
         return view('users.followProfile',

@@ -17,7 +17,7 @@
         <input name="id" value="{{$users->id}}" type="hidden">
         <input type="submit" value="フォローする">
     </form>
-    @endif
+@endif
     <br>
 
 @foreach($posts as $post)
