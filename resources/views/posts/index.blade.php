@@ -17,13 +17,39 @@
     {{$post->post}}
     {{$post->created_at}}
     {!! Form::open(['url' => '/post/update']) !!}
-            {!! Form::hidden('id', $post->id) !!}
-            {!! Form::input('text', 'upPost', $post->post, ['required', 'class' => 'form-control']) !!}
-        <button type="submit" class="btn btn-primary pull-right">更新</button>
+    {!! Form::hidden('id', $post->id) !!}
+    {!! Form::input('text', 'upPost', $post->post, ['required', 'class' => 'form-control']) !!}
+
     {!! Form::close() !!}
-    <a class="btn btn-danger" href="/post/{{ $post->id }}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">
-    <input type="image" src="images/trash_h.png" >
+<a class="btn btn-danger" href="/post/{{ $post->id }}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">
+<input type="image" src="images/trash_h.png" >
 </a>
+
+<!-- 1つ目のライフスタイルボックス -->
+<div class="post-type">
+  <a href="" class="modalopen"  data-target="modal01">
+    <p class="post-name">
+      <input type="image" src="images/edit.png" >
+    </p>
+  </a>
+</div>
+  <!-- 1つ目のモーダルの中身 -->
+  <div class="modal-main js-modal" id="modal01">
+    <div class="modal-inner">
+        <div class="inner-content">
+<p class="inner-text">
+{{$post->post}}
+{!! Form::open(['url' => '/post/update']) !!}
+    {!! Form::hidden('id', $post->id) !!}
+    {!! Form::input('text', 'upPost', $post->post, ['required', 'class' => 'form-control']) !!}
+    <input type="image" src="images/edit.png" >
+{!! Form::close() !!}
+</p>
+<a class="send-button modalClose">Close</a>
+  </div>
+    </div>
+        </div>
+
 <br>
 @endforeach
 
