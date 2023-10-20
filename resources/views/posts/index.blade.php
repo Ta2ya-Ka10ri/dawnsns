@@ -25,17 +25,18 @@
 <input type="image" src="images/trash_h.png" >
 </a>
 
-<!-- 1つ目のライフスタイルボックス -->
-<div class="post-type">
-  <a href="" class="modalopen"  data-target="modal01">
+<section class="section">
+<a href="" class="modalopen"  data-target="modal01">
     <p class="post-name">
       <input type="image" src="images/edit.png" >
     </p>
   </a>
-</div>
+</section>
   <!-- 1つ目のモーダルの中身 -->
-  <div class="modal-main js-modal" id="modal01">
-    <div class="modal-inner">
+<div id="modal" class="modal-overlay">
+  <div id="modal-content">
+    <div class="modal-main js-modal" id="modal01">
+      <div class="modal-inner">
         <div class="inner-content">
 <p class="inner-text">
 {{$post->post}}
@@ -45,11 +46,15 @@
     <input type="image" src="images/edit.png" >
 {!! Form::close() !!}
 </p>
+<p>
 <a class="send-button modalClose">Close</a>
-  </div>
-    </div>
+</p>
         </div>
-
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 <br>
 @endforeach
 

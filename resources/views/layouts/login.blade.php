@@ -20,7 +20,7 @@
     <!--OGPタグ/twitterカード-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="./js/script.js"></script>
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/style.css 2">
 </head>
 <body>
     <header>

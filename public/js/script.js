@@ -15,3 +15,9 @@ $(function () { //①
       return false;
     });
   });
+
+  $(document).on('click',function(e) {
+    if(!$(e.target).closest('.modal-body').length) {
+      container.removeClass('active');
+    }
+  });
