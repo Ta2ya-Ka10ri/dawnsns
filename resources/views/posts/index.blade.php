@@ -6,7 +6,7 @@
     <h2 class='page-header'>新しく投稿をする</h2>
     <form action='post/create'>
         <div class="form-group">
-            <textarea name="newPost" id="" cols="30" rows="10" placeholder="何をつぶやこうか....？"></textarea>
+            <textarea name="newPost" id="" cols="75" rows="2" placeholder="何をつぶやこうか....？"></textarea>
         </div>
         <input type="image" src="images/post.png" >
     </form>
@@ -25,13 +25,11 @@
 <input type="image" src="images/trash_h.png" >
 </a>
 
-<section class="section">
-<a href="" class="modalopen"  data-target="modal01">
+<button class="modalopen"  data-target="modal01">
     <p class="post-name">
       <input type="image" src="images/edit.png" >
     </p>
-  </a>
-</section>
+  </button>
   <!-- 1つ目のモーダルの中身 -->
 <div id="modal" class="modal-overlay">
   <div id="modal-content">
@@ -47,14 +45,15 @@
 {!! Form::close() !!}
 </p>
 <p>
-<a class="send-button modalClose">Close</a>
+<button class="send-button modalClose">Close
+</button>
 </p>
         </div>
       </div>
     </div>
   </div>
 </div>
-</section>
+
 <br>
 @endforeach
 

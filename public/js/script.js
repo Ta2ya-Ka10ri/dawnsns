@@ -10,14 +10,12 @@ $(function () { //①
         return false;
       });
     });
-    $('.modalClose').on('click', function () {
+
+    $('.modalClose').on('click', function (e) {
+      if (!$(e.target).closest('.elm').length){
       $('.js-modal').fadeOut();
+      }
       return false;
     });
-  });
 
-  $(document).on('click',function(e) {
-    if(!$(e.target).closest('.modal-body').length) {
-      container.removeClass('active');
-    }
   });

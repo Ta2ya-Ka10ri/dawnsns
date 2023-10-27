@@ -31,6 +31,8 @@ header{
     display: none;
   }
 
+
+
   .modal-inner { /* ② モーダル背景を画面幅いっぱいに設定し、位置を固定する。 */
     overflow-y: scroll;
     display: flex;
@@ -38,8 +40,8 @@ header{
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: #ffffff;
-    color: #666666;
+    background-color: rgba(0,0,0,40%);
+    color: #000000;
     position: fixed;
     top: 0;
     left: 0;
@@ -48,6 +50,7 @@ header{
 
   .inner-content{ /* ③ モーダル内の要素全体の子要素を中央揃えにする。 */
     text-align: center;
+    background-color: rgb(255, 255, 255);
     margin: 0;
     padding: 0;
     max-width: 1024px;
@@ -67,7 +70,7 @@ header{
   }
 
   .inner-text{ /* ⑥紹介文の文字サイズの設定・表示領域は70%で設定し、他要素との間隔調整。 */
-    font-size: 1.6rem;
+    font-size: 1.0rem;
     width: 70%;
     text-align: center;
     margin: 0 auto;
@@ -76,15 +79,4 @@ header{
 
   .modalClose{ /* ⑦ カーソル設定をします。（.send-button）というお問い合わせボタンで使用したクラスを反映しているので、その他のスタイルは自動的に反映される。 */
     cursor: pointer;
-  }
-
-  .modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
   }
