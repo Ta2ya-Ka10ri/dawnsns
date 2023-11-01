@@ -25,35 +25,21 @@
 <input type="image" src="images/trash_h.png" >
 </a>
 
-<button class="modalopen"  data-target="modal01">
-    <p class="post-name">
-      <input type="image" src="images/edit.png" >
-    </p>
-  </button>
-  <!-- 1つ目のモーダルの中身 -->
-<div id="modal" class="modal-overlay">
-  <div id="modal-content">
-    <div class="modal-main js-modal" id="modal01">
-      <div class="modal-inner">
-        <div class="inner-content">
-<p class="inner-text">
-{{$post->post}}
-{!! Form::open(['url' => '/post/update']) !!}
-    {!! Form::hidden('id', $post->id) !!}
-    {!! Form::input('text', 'upPost', $post->post, ['required', 'class' => 'form-control']) !!}
-    <input type="image" src="images/edit.png" >
-{!! Form::close() !!}
-</p>
-<p>
-<button class="send-button modalClose">Close
-</button>
-</p>
-        </div>
-      </div>
+<div class="modalopen"  data-target="{{$post->id}}">
+  <input type="image" src="images/edit.png" >
+</div>
+<!-- 1つ目のモーダルの中身 -->
+<div class="modal-main js-modal" id="{{$post->id}}">
+  <div class="modal-inner">
+    <div class="inner-content">
+      {!! Form::open(['url' => '/post/update']) !!}
+          {!! Form::hidden('id', $post->id) !!}
+          {!! Form::input('text', 'upPost', $post->post, ['required']) !!}
+          <input type="image" src="images/edit.png" >
+      {!! Form::close() !!}
     </div>
   </div>
 </div>
-
 <br>
 @endforeach
 

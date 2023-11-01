@@ -11,11 +11,12 @@ $(function () { //①
       });
     });
 
-    $('.modalClose').on('click', function (e) {
-      if (!$(e.target).closest('.elm').length){
+    $('.modal-inner').on('click', function (e) {
+      if (!$(e.target).closest('.inner-content').length){
+        console.log('hello');
       $('.js-modal').fadeOut();
-      }
       return false;
+      }
     });
 
   });
