@@ -60,6 +60,3 @@ Route::post('post/update', 'PostsController@update');
 Route::post('user/update', 'UsersController@update');
 
 Route::get('/follow-profile','UsersController@profile');
-
-Route::get('profile/vali', 'ValiController@index');
-Route::post('profile/vali', 'ValiController@receivesData');
