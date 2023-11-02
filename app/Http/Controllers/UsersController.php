@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -37,15 +38,29 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|string|min:4|max:12',
+            'mail' => 'required|string|min:4|max:12|'.Rule::unique('users')->ignore(Auth::id()),
+            'password' => 'string|min:4|max:12|unique:users',
+            'bio' => 'max:200',
+            'image' => 'image',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+
         $id = Auth::id();
-        $up_user = $request->input('upUser');
+        $up_user = $request->input('username');
         // dd($up_user);
         DB::table('users')
             ->where('id', $id)
             ->update(
                 ['username'=> $up_user]
             );
-        $up_mail = $request->input('upMail');
+        $up_mail = $request->input('mail');
         // dd($up_mail);
         DB::table('users')
         ->where('id', $id)
@@ -53,20 +68,20 @@ class UsersController extends Controller
             ['mail'=> $up_mail]
         );
 
-        $newBio=$request->input('newBio');
-        // dd($newBio);
+        $bio=$request->input('bio');
+        // dd(bio);
         DB::table('users')
         ->where('id', $id)
         ->update(
-            ['bio'=> $newBio]
+            ['bio'=> $bio]
         );
 
-        $newImage=$request->file('newImage');
-        dd($newImage);
+        $image=$request->file('image');
+        // dd($image);
         DB::table('users')
         ->where('id', $id)
         ->update(
-            ['image'=> $newImage]
+            ['image'=> $image]
         );
             return redirect('/profile');
     }
