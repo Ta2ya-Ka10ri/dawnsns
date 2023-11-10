@@ -41,7 +41,6 @@ class UsersController extends Controller
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|min:4|max:12',
             'mail' => 'required|string|min:4|max:12|'.Rule::unique('users')->ignore(Auth::id()),
-            'password' => 'string|min:4|max:12|unique:users',
             'bio' => 'max:200',
             'image' => 'image',
         ]);
@@ -68,8 +67,27 @@ class UsersController extends Controller
             ['mail'=> $up_mail]
         );
 
+        $up_password = $request->input('password');
+        if(isset($up_password)){
+            $validator = Validator::make($request->all(), [
+                'password' => 'string|min:4|max:12|unique:users',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                ->withInput()
+                ->withErrors($validator);
+            }
+            // dd($up_password);
+            DB::table('users')
+            ->where('id', $id)
+            ->update(
+                ['password'=> bcrypt($up_password)]
+            );
+        }
+
         $bio=$request->input('bio');
-        // dd(bio);
+        // dd($bio);
         DB::table('users')
         ->where('id', $id)
         ->update(
@@ -86,24 +104,16 @@ class UsersController extends Controller
             return redirect('/profile');
     }
 
-    public function profile()
+    public function profile($id)
     {
+        // dd($id);
         $users = DB::table('users')
-        ->where('users.id',Auth::id())
-        ->select('users.id','users.username','users.mail','users.password','users.bio','users.image','users.created_at as created_at')
+        ->where('users.id',$id)
         ->first();
 
-        $user = Auth::user();
-        $others = DB::table('users')
-        ->join('follows','follows.follow_id','=','users.id')
-        ->where('follows.follower_id',Auth::id())
-        ->select('users.image')
-        ->first();
-
-        $user = Auth::user();
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
-        ->where('posts.user_id',Auth::id())
+        ->where('posts.user_id',$id)
         ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at')
         ->get();
 
@@ -112,7 +122,7 @@ class UsersController extends Controller
         ->pluck('follow_id');
 
         return view('users.followProfile',
-        ['users'=>$users,'others'=>$others,'posts'=>$posts,'follows'=>$follows]);
+        ['users'=>$users,'posts'=>$posts,'follows'=>$follows]);
     }
 
     public function addFollow(Request $request)

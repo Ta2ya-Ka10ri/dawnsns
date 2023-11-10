@@ -18,7 +18,7 @@ class FollowsController extends Controller
         $others = DB::table('users')
         ->join('follows','follows.follow_id','=','users.id')
         ->where('follows.follower_id',Auth::id())
-        ->select('users.image')
+        ->select('users.image','users.id')
         ->get();
         // dd($others);
         $posts = DB::table('posts')

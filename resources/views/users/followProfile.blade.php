@@ -2,9 +2,9 @@
 
 @section('content')
 
-<img src="/images/{{$others->image}}" alt="">
-<p> Name {{Auth::user()->username}} </p>
-<p> Bio {{Auth::user()->bio}} </p>
+<img src="/images/{{$users->image}}" alt="">
+<p> Name {{$users->username}} </p>
+<p> Bio {{$users->bio}} </p>
 <br>
 
 @if($follows->contains($users->id))
