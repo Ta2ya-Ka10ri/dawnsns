@@ -12,7 +12,7 @@
     </form>
 </div>
 @foreach($posts as $post)
-    <img src="/images/{{$post->image}}" alt="">
+    <img src="/storage/img/{{$post->image}}" alt="">
     {{$post->username}}
     {{$post->post}}
     {{$post->created_at}}

@@ -30,7 +30,7 @@
                 <div id="">
                     <p>
                     {{Auth::user()->username}}さん
-                    <img src="/images/{{Auth::user()->image}}" alt="">
+                    <img src="/storage/img/{{Auth::user()->image}}" alt="">
                 </p>
                 </div>
                 <div>

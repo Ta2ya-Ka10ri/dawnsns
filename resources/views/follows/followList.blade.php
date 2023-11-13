@@ -6,7 +6,7 @@
 
 @foreach($others as $other)
 <a href="/follow-profile/{{$other->id}}">
-    <img src="/images/{{$other->image}}" alt="">
+    <img src="/storage/img/{{$other->image}}" alt="">
 </a>
 <float:left>
 @endforeach
@@ -14,7 +14,7 @@
 
 @foreach($posts as $post)
 <a href="/follow-profile/{{$post->id}}">
-    <img src="/images/{{$post->image}}" alt="">
+    <img src="/storage/img/{{$post->image}}" alt="">
 </a>
     {{$post->username}}
     {{$post->post}}

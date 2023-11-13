@@ -2,7 +2,7 @@
 
 @section('content')
 
-<img src="/images/{{$users->image}}" alt="">
+<img src="/storage/img/{{$users->image}}" alt="">
 <p> Name {{$users->username}} </p>
 <p> Bio {{$users->bio}} </p>
 <br>
@@ -21,7 +21,7 @@
     <br>
 
 @foreach($posts as $post)
-    <img src="/images/{{$post->image}}" alt="">
+    <img src="/storage/img/{{$post->image}}" alt="">
     {{$post->username}}
     {{$post->post}}
     {{$post->created_at}}

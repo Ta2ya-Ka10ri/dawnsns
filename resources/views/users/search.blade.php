@@ -13,7 +13,7 @@
 @endif
 
 @foreach($users as $user)
-    <img src="/images/{{$user->image}}" alt="">
+    <img src="/storage/img/{{$user->image}}" alt="">
     {{$user->username}}
     @if($follows->contains($user->id))
     <form action='/un-follow'>

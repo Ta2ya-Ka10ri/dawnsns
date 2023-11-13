@@ -94,13 +94,14 @@ class UsersController extends Controller
             ['bio'=> $bio]
         );
 
-        $image=$request->file('image');
-        // dd($image);
+        $image_name=$request->file('image')->getClientOriginalName();
+        // dd($image_name);
         DB::table('users')
         ->where('id', $id)
         ->update(
-            ['image'=> $image]
+            ['image'=> $image_name]
         );
+        $request->file('image')->storeAs('public/img', $image_name);
             return redirect('/profile');
     }
 
