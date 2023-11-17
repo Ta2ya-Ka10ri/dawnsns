@@ -67,7 +67,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'username' => 'required|string|min:4|max:12',
-            'mail' => 'required|string|email|min:4|max:12|unique:users',
+            'mail' => 'required|string|email|min:4|max:12|'.Rule::unique('users')->ignore(Auth::id()),
             'password' => 'required|string|min:4|max:12|unique:users',
             'password confirm' => 'required|string|min:4|max:12|confirmed',
         ]);
