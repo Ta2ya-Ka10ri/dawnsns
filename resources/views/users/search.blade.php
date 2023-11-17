@@ -18,12 +18,12 @@
     @if($follows->contains($user->id))
     <form action='/un-follow'>
         <input name="id" value="{{$user->id}}" type="hidden">
-        <input type="submit" value="フォローを外す">
+        <input type="submit" value="フォローを外す" style="background:#B95656">
     </form>
     @else
     <form action='/add-follow'>
         <input name="id" value="{{$user->id}}" type="hidden">
-        <input type="submit" value="フォローする">
+        <input type="submit" value="フォローする" style="background:#4B71CA">
     </form>
     @endif
     <br>

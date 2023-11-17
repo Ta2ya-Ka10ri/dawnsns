@@ -22,7 +22,7 @@
 
     {!! Form::close() !!}
 <a class="btn btn-danger" href="/post/{{ $post->id }}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">
-<input type="image" src="images/trash_h.png" >
+<input type="image" src="images/trash_h.png" onmouseover="this.src='images/trash_h.png'" onmouseout="this.src='images/trash.png'" />
 </a>
 
 <div class="modalopen"  data-target="{{$post->id}}">
