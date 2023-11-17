@@ -13,7 +13,7 @@
 <br>
 
 @foreach($posts as $post)
-<a href="/follow-profile/{{$post->id}}">
+<a href="/follow-profile/{{$post->user_id}}">
     <img src="/storage/img/{{$post->image}}" alt="">
 </a>
     {{$post->username}}

@@ -111,13 +111,13 @@ class UsersController extends Controller
         $users = DB::table('users')
         ->where('users.id',$id)
         ->first();
-
+        // dd($users);
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
         ->where('posts.user_id',$id)
         ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at')
         ->get();
-
+        // dd($posts);
         $follows = DB::table('follows')
         ->where('follower_id',Auth::id())
         ->pluck('follow_id');
