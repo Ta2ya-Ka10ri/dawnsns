@@ -115,7 +115,7 @@ class UsersController extends Controller
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
         ->where('posts.user_id',$id)
-        ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at')
+        ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at','posts.updated_at as updated_at')
         ->get();
         // dd($posts);
         $follows = DB::table('follows')

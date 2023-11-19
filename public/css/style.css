@@ -26,6 +26,21 @@ header{
     justify-content: space-between;
 }
 
+summary {
+  list-style-type: none;
+  }
+  summary::-webkit-details-marker {
+  display: none;
+  }
+  summary:before {
+  content: "＋";
+  }
+  details[open] summary:before,
+  summary details[open] summary:before {
+  content: "−";
+  }
+  
+
 /* モーダルのスタイル */
 .modal-main{ /* ① モーダルウィンドウを非表示にする。*/
     display: none;

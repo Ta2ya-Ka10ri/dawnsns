@@ -12,21 +12,22 @@ class FollowsController extends Controller
     {
         $user = Auth::user();
         $follow_count = DB::table('follows')
-        ->where('follower_id',Auth::id())
-        ->count();
+            ->where('follower_id',Auth::id())
+            ->count();
         // dd($follow_count);
         $others = DB::table('users')
-        ->join('follows','follows.follow_id','=','users.id')
-        ->where('follows.follower_id',Auth::id())
-        ->select('users.image','users.id')
-        ->get();
+            ->join('follows','follows.follow_id','=','users.id')
+            ->where('follows.follower_id',Auth::id())
+            ->select('users.image','users.id')
+            ->get();
         // dd($others);
         $posts = DB::table('posts')
-        ->join('users','posts.user_id','=','users.id')
-        ->join('follows','follows.follow_id','=','users.id')
-        ->where('follows.follower_id',Auth::id())
-        ->select('users.id','users.username','users.image','posts.post','posts.created_at','posts.user_id','follows.id','follows.follow_id')
-        ->get();
+            ->join('users','posts.user_id','=','users.id')
+            ->join('follows','follows.follow_id','=','users.id')
+            ->where('follows.follower_id',Auth::id())
+            ->select('users.id','users.username','users.image','posts.post','posts.created_at','posts.user_id','follows.id','follows.follow_id')
+            ->orderby('posts.created_at', 'desc')
+            ->get();
         return view('follows.followList',['user'=>$user,'posts'=>$posts,'others'=>$others,'follow_count'=>$follow_count]);
     }
 

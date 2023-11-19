@@ -10,12 +10,17 @@ class PostsController extends Controller
 {
     public function index()
     {
+        $follow = DB::table('follows')
+        ->where('follower_id',Auth::id())
+        ->pluck('follow_id');
         $user = Auth::user();
         $posts = DB::table('posts')
         ->join('users','posts.user_id','=','users.id')
         ->where('posts.user_id',Auth::id())
-        ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at')
+        ->orWhereIn('posts.user_id',$follow)
+        ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at','posts.updated_at as updated_at')
         ->get();
+        // dd($posts);
         return view('posts.index',['user'=>$user,'posts'=>$posts]);
     }
 
@@ -56,7 +61,7 @@ class PostsController extends Controller
     {
         $users = DB::table('users')
         ->where('users.id',Auth::id())
-        ->select('users.id','users.username','users.mail','users.password','users.bio','users.image','users.created_at as created_at')
+        ->select('users.id','users.username','users.mail','users.password','users.bio','users.image','users.created_at as created_at','users.updated_at as updated_at')
         ->first();
         return view('users.profile',['users'=>$users]);
     }
@@ -77,7 +82,7 @@ class PostsController extends Controller
         ->join('users','posts.user_id','=','users.id')
         ->join('follows','follows.follower_id','=','users.id')
         ->where('follows.follow_id',Auth::id())
-        ->select('users.id','users.username','users.image','posts.post','posts.created_at','posts.user_id','follows.id','follows.follower_id')
+        ->select('users.id','users.username','users.image','posts.post','posts.created_at','posts.updated_at','posts.user_id','follows.id','follows.follower_id')
         ->get();
         return view('follows.followerList',['user'=>$user,'posts'=>$posts,'others'=>$others,'follower_count'=>$follower_count]);
     }
