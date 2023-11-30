@@ -18,21 +18,18 @@ class UsersController extends Controller
         ->where('follower_id',Auth::id())
         ->pluck('follow_id');
         $keyword = null;
-        // dd($keyword);
         return view('users.search',['users'=>$users,'follows'=>$follows,'keyword'=>$keyword]);
     }
 
     public function result(Request $request)
     {
         $keyword=$request->keyword;
-        // dd($keyword);
         $users = DB::table('users')
-        ->where('username', 'like', '%' . $keyword . '%')
-        ->get();
-        // dd($users);
+            ->where('username', 'like', '%' . $keyword . '%')
+            ->get();
         $follows = DB::table('follows')
-        ->where('follower_id',Auth::id())
-        ->pluck('follow_id');
+            ->where('follower_id',Auth::id())
+            ->pluck('follow_id');
         return view('users.search',['users'=>$users,'follows'=>$follows,'keyword'=>$keyword]);
     }
 
@@ -94,15 +91,16 @@ class UsersController extends Controller
             ['bio'=> $bio]
         );
 
-        $image_name=$request->file('image')->getClientOriginalName();
-        // dd($image_name);
-        DB::table('users')
-        ->where('id', $id)
-        ->update(
-            ['image'=> $image_name]
-        );
-        $request->file('image')->storeAs('public/img', $image_name);
-            return redirect('/profile');
+        if(!empty($request->file('image'))){
+            $image_name=$request->file('image')->getClientOriginalName();
+            DB::table('users')
+            ->where('id', $id)
+            ->update(
+                ['image'=> $image_name]
+            );
+            $request->file('image')->storeAs('public/img', $image_name);
+        }
+    return redirect('/profile');
     }
 
     public function profile($id)

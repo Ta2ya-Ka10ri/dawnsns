@@ -13,7 +13,7 @@ $(function () { //①
 
     $('.modal-inner').on('click', function (e) {
       if (!$(e.target).closest('.inner-content').length){
-        console.log('hello');
+        // console.log('hello');
       $('.js-modal').fadeOut();
       return false;
       }

@@ -51,4 +51,17 @@ class FollowsController extends Controller
         return redirect('/search');
     }
 
+    public function index()
+    {
+        $user = Auth::user();
+        $posts = DB::table('posts')
+        ->join('users','posts.user_id','=','users.id')
+        ->where('posts.user_id',Auth::id())
+        ->select('posts.id','users.image','users.username','posts.post','posts.created_at as created_at','posts.updated_at as updated_at')
+        ->get();
+        // dd($posts);
+        return view('posts.index',['user'=>$user,'posts'=>$posts]);
+    }
+
+
 }

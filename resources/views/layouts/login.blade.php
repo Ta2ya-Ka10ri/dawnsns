@@ -63,6 +63,7 @@
                 <button onclick="location.href='/followerList'">フォロワーリスト</button>
             </div>
                 <button onclick="location.href='/search'">ユーザー検索</button>
+                <button onclick="location.href='/test'">test</button>
         </div>
     </div>
     <footer>
